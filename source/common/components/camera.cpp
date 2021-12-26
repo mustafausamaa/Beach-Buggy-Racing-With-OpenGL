@@ -35,17 +35,40 @@ namespace our {
         // - the center position which is the point (0,0,-1) but after being transformed by M
         // - the up direction which is the vector (0,1,0) but after being transformed by M
         // then you can use glm::lookAt
-        return glm::mat4(1.0f);
+        glm::vec3 eye = M * glm::vec4(0.0f,0.0f,0.0f,1.0f);
+        glm::vec3 center = M * glm::vec4(0.0f,0.0f,-1.0f,1.0f);
+        glm::vec3 up = M * glm::vec4(0.0f,1.0f,0.0f,0.0f); /*A Vector Homogenous Coordinate = 0*/
+        glm::mat4 c_view = glm::lookAt(eye,center,up);
+       
+        return c_view;
     }
 
     // Creates and returns the camera projection matrix
     // "viewportSize" is used to compute the aspect ratio
     glm::mat4 CameraComponent::getProjectionMatrix(glm::ivec2 viewportSize) const {
-        //TODO: Wrtie this function
+        //TODO: Wrtie this function 
+        glm::mat4 projectionMatrix;
+        float aspectRatio = (float)(viewportSize.x / viewportSize.y ); 
         // NOTE: The function glm::ortho can be used to create the orthographic projection matrix
         // It takes left, right, bottom, top. Bottom is -orthoHeight/2 and Top is orthoHeight/2.
         // Left and Right are the same but after being multiplied by the aspect ratio
+        if(cameraType == CameraType::ORTHOGRAPHIC){
+
+            float bottom = -orthoHeight/2;
+            float top = orthoHeight/2;
+            float left = (-orthoHeight/2) * aspectRatio;
+            float right = (orthoHeight/2) * aspectRatio;
+            projectionMatrix = glm::ortho(left,right,bottom,top,near,far);
+
+        }else if(cameraType == CameraType::PERSPECTIVE){
+            projectionMatrix = glm::perspective(fovY,aspectRatio,near,far);
+            /*
+            * Takes 4 parameters; vectorview, aspect ratio between width&height , near (nearest point you can see) , far (farest point you can see)
+            * later on near,far to be between -1,1 
+            */
+        }
+
         // For the perspective camera, you can use glm::perspective
-        return glm::mat4(1.0f);
+        return projectionMatrix;
     }
 }
