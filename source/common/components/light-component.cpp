@@ -1,64 +1,61 @@
 #include "light-component.hpp"
 #include "../ecs/entity.hpp"
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp> 
+#include <glm/gtc/matrix_transform.hpp>
+#include "../asset-loader.hpp"
+#include "deserialize-utils.hpp"
 
-
-namespace our {
-      LightType getLightType()
+namespace our
+{
+    LightType LightComponent::getLightType()
     {
-        return this->type;
+        return lightType;
     }
 
-    void setDirectional( glm::vec3 direction)
+    void LightComponent::setDirectional(glm::vec3 direction)
     {
-        this->type=LightType::DIRECTIONAL;
-        this->direction=direction;
-        this->diffuse = {1,1,1};
-        this->specular = {1,1,1};
-        this->ambient = {26, 26, 26};
+        lightType = LightType::DIRECTIONAL;
+        direction = direction;
+        diffuse = {1, 1, 1};
+        specular = {1, 1, 1};
+        ambient = {26, 26, 26};
     }
-    void setShader(our::ShaderProgram* program) override
+    void LightComponent::set_camera_transform(glm::mat4 camera_transform)
     {
-        this->program=program;
+        our::camera_transform = camera_transform;
     }
-    void set_camera_transform( glm::mat4 camera_transform) override
+    void LightComponent::seteyeposition(glm::vec3 eye)
     {
-        this->camera_transform=camera_transform;
+        our::eye = eye;
     }
-    void seteyeposition(glm::vec3 eye) override
+    void LightComponent::Update()
     {
-        this->eye=eye;
-    }
-    void Update() override
-    {
-        glUseProgram(*program);
+        program->use();
 
         program->set("light.diffuse", this->diffuse);
         program->set("light.specular", this->specular);
         program->set("light.ambient", this->ambient);
 
-
-        switch(lighType){
-            case LightType::DIRECTIONAL:
-                program->set("light.direction", glm::normalize(direction));
-                break;
-            case LightType::POINT:
-                program->set("light.position", position);
-                program->set("light.attenuation_constant", attenuation.constant);
-                program->set("light.attenuation_linear", attenuation.linear);
-                program->set("light.attenuation_quadratic", attenuation.quadratic);
-                break;
-            case LightType::SPOT:
-                program->set("light.position", position);
-                program->set("light.direction", glm::normalize(direction));
-                program->set("light.attenuation_constant", attenuation.constant);
-                program->set("light.attenuation_linear", attenuation.linear);
-                program->set("light.attenuation_quadratic", attenuation.quadratic);
-                program->set("light.inner_angle", spot_angle.inner);
-                program->set("light.outer_angle", spot_angle.outer);
-                break;
+        switch (lightType)
+        {
+        case LightType::DIRECTIONAL:
+            program->set("light.direction", glm::normalize(direction));
+            break;
+        case LightType::POINT:
+            program->set("light.position", position);
+            program->set("light.attenuation_constant", attenuation.constant);
+            program->set("light.attenuation_linear", attenuation.linear);
+            program->set("light.attenuation_quadratic", attenuation.quadratic);
+            break;
+        case LightType::SPOTLIGHT:
+            program->set("light.position", position);
+            program->set("light.direction", glm::normalize(direction));
+            program->set("light.attenuation_constant", attenuation.constant);
+            program->set("light.attenuation_linear", attenuation.linear);
+            program->set("light.attenuation_quadratic", attenuation.quadratic);
+            program->set("light.inner_angle", spot_angle.inner);
+            program->set("light.outer_angle", spot_angle.outer);
+            break;
         }
-
-
+    }
 }

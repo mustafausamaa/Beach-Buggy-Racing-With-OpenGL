@@ -22,6 +22,7 @@ class Playstate : public our::State
     our::RespawnSystem respawnSystem;
     bool startgame = false;
     bool Exit = false;
+    bool restart = false;
 
     void onInitialize() override
     {
@@ -69,7 +70,14 @@ class Playstate : public our::State
         ImGui::Begin("Menu");
 
         ImGui::Selectable(startgame ? "Pause Game" : "Start Game", &startgame);
+        ImGui::Selectable("Restart Game", &restart);
         ImGui::Selectable("Exit Game", &Exit);
+        if (restart)
+        {
+            onInitialize();
+            restart = false;
+        }
+
         if (Exit)
         {
             onDestroy();

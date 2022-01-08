@@ -87,4 +87,55 @@ namespace our
         sampler = AssetLoader<Sampler>::get(data.value("sampler", ""));
     }
 
+    void LitMaterial::setup() const
+    {
+        // TODO: Write this function
+
+        // 1) call material setup to set the pipeline state and set the shader to be used
+        Material::setup();
+
+        // 2) set the Uniform alphaThreshold in textured shader with the data member alphathreshold
+        shader->set("alphaThreshold", alphaThreshold);
+        glActiveTexture(GL_TEXTURE0);
+        texture[0]->bind();
+        // 4) bind the sampler to the same unit number 0
+        sampler->bind(0);
+        // 5) we send 0(the index of the texture unit we used above)to the "tex" uniform in textured shader
+        shader->set("material.albedo", 0);
+
+        glActiveTexture(GL_TEXTURE1);
+        texture[1]->bind();
+        sampler->bind(1);
+        shader->set("material.specular", 1);
+
+        glActiveTexture(GL_TEXTURE2);
+        texture[2]->bind();
+        sampler->bind(2);
+        shader->set("material.roughness", 2);
+
+        glActiveTexture(GL_TEXTURE3);
+        texture[3]->bind();
+        sampler->bind(3);
+        shader->set("material.ambient_occlusion", 3);
+
+        glActiveTexture(GL_TEXTURE4);
+        texture[4]->bind();
+        sampler->bind(4);
+        shader->set("material.emission", 4);
+    }
+
+    // This function read the material data from a json object
+    void LitMaterial::deserialize(const nlohmann::json &data)
+    {
+        TintedMaterial::deserialize(data);
+        if (!data.is_object())
+            return;
+        alphaThreshold = data.value("alphaThreshold", 0.0f);
+        texture[0] = AssetLoader<Texture2D>::get(data.value("albedo-texture", ""));
+        texture[1] = AssetLoader<Texture2D>::get(data.value("specular-texture", ""));
+        texture[2] = AssetLoader<Texture2D>::get(data.value("roughness-texture", ""));
+        texture[3] = AssetLoader<Texture2D>::get(data.value("ambient_occlusion-texture", ""));
+        texture[4] = AssetLoader<Texture2D>::get(data.value("emission-texture", ""));
+        sampler = AssetLoader<Sampler>::get(data.value("sampler", ""));
+    }
 }

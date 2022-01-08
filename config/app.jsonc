@@ -64,6 +64,7 @@
                             "enabled": true
                         }
                     },
+                    "albedo-texture": "",
                     "tint": [
                         0.45,
                         0.4,

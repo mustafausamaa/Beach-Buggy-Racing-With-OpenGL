@@ -58,7 +58,7 @@ vec3 compute_sky_light(vec3 normal, SkyLight sky_light) {
 
 uniform Material material;
 uniform int light_count;
-uniform Light lights[MAX_LIGHTS];
+uniform Light lights[MAX_LIGHTS];    
 uniform SkyLight sky_light;
 
 void main(){
