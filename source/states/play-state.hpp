@@ -51,7 +51,7 @@ class Playstate : public our::State
             // And finally we use the renderer system to draw the scene
             auto size = getApp()->getFrameBufferSize();
             renderer.render(&world, glm::ivec2(0, 0), size);
-        }
+                }
     }
 
     void onDestroy() override

@@ -1,80 +1,86 @@
 {
     "start-scene": "main",
-    "window":
-    {
-        "title":"Default Game Window",
-        "size":{
-            "width":1280,
-            "height":720
+    "window": {
+        "title": "Default Game Window",
+        "size": {
+            "width": 1280,
+            "height": 720
         },
         "fullscreen": false
     },
     "scene": {
-        "assets":{
-            "shaders":{
-                "tinted":{
-                    "vs":"assets/shaders/tinted.vert",
-                    "fs":"assets/shaders/tinted.frag"
+        "assets": {
+            "shaders": {
+                "tinted": {
+                    "vs": "assets/shaders/tinted.vert",
+                    "fs": "assets/shaders/tinted.frag"
                 },
-                "textured":{
-                    "vs":"assets/shaders/textured.vert",
-                    "fs":"assets/shaders/textured.frag"
+                "textured": {
+                    "vs": "assets/shaders/textured.vert",
+                    "fs": "assets/shaders/textured.frag"
                 }
             },
-            "textures":{
+            "textures": {
                 "moon": "assets/textures/moon.jpg",
                 "grass": "assets/textures/snowground.jpg",
                 "wood": "assets/textures/wood.jpg",
                 "glass": "assets/textures/glass-panels.png",
                 "monkey": "assets/textures/test1.png",
-                "motoTexture":"assets/textures/QuadBike.jpeg",
-                "enemymotoTexture":"assets/textures/QuadBike.jpeg",
-                "redbarrier":"assets/textures/redbarrier.jpeg",
-                "concretebarrier":"assets/textures/concretebarrier.jpeg",
-                "driver":"assets/textures/driver.png"
-
+                "motoTexture": "assets/textures/QuadBike.jpeg",
+                "enemymotoTexture": "assets/textures/QuadBike.jpeg",
+                "redbarrier": "assets/textures/redbarrier.jpeg",
+                "concretebarrier": "assets/textures/concretebarrier.jpeg",
+                "driver": "assets/textures/driver.png",
+                "startline": "assets/textures/startline.jpg",
+                "startsign": "assets/textures/startsign.jpg"
             },
-            "meshes":{
+            "meshes": {
                 "cube": "assets/models/cube.obj",
                 "motorcycle": "assets/models/QuadBike.obj",
                 "motorcycleenemy": "assets/models/QuadBike.obj",
                 "plane": "assets/models/plane.obj",
                 "sphere": "assets/models/sphere.obj",
-                "redbarrier":"assets/models/redbarrier.obj",
-                "concretebarrier":"assets/models/concretebarrier.obj",
-                "driver":"assets/textures/driver.obj"
+                "redbarrier": "assets/models/redbarrier.obj",
+                "concretebarrier": "assets/models/concretebarrier.obj",
+                "driver": "assets/textures/driver.obj",
+                "startline": "assets/models/startline.obj"
             },
-            "samplers":{
-                "default":{},
-                "pixelated":{
+            "samplers": {
+                "default": {},
+                "pixelated": {
                     "MAG_FILTER": "GL_NEAREST"
                 }
             },
-            "materials":{
-                "metal":{
+            "materials": {
+                "metal": {
                     "type": "tinted",
                     "shader": "tinted",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
-                    "tint": [0.45, 0.4, 0.5, 1]
+                    "tint": [
+                        0.45,
+                        0.4,
+                        0.5,
+                        1
+                    ]
                 },
-                "glass":{
+                "glass": {
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         },
-                        "blending":{
+                        "blending": {
                             "enabled": true,
                             "sourceFactor": "GL_SRC_ALPHA",
                             "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
@@ -82,112 +88,192 @@
                         "depthMask": false
                     },
                     "transparent": false,
-                    "tint": [1, 1, 1, 1],
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
                     "texture": "glass",
                     "sampler": "pixelated"
                 },
-                "grass":{
+                "grass": {
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
-                    "tint": [1, 1, 1, 1],
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
                     "texture": "grass",
                     "sampler": "default"
                 },
-                "motorcycle":{
+                "startsign": {
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
-                    "tint": [1, 1, 1, 1],
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "startsign",
+                    "sampler": "default"
+                },
+                "motorcycle": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
                     "texture": "motoTexture",
                     "sampler": "default"
                 },
-                "motorcycleenemy":{
+                "startline": {
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
-                    "tint": [1, 1, 1, 1],
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "startline",
+                    "sampler": "default"
+                },
+                "motorcycleenemy": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
                     "texture": "enemymotoTexture",
                     "sampler": "default"
                 },
-                "driver":{
+                "driver": {
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
-                    "tint": [1, 1, 1, 1],
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
                     "texture": "driver",
                     "sampler": "default"
                 },
-                "moon":{
+                "moon": {
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
-                    "tint": [1, 1, 1, 1],
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
                     "texture": "moon",
                     "sampler": "default"
                 },
-                "redbarrier":{
+                "redbarrier": {
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
-                    "tint": [1, 1, 1, 1],
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
                     "texture": "redbarrier",
                     "sampler": "default"
                 },
-                "concretebarrier":{
+                "concretebarrier": {
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
-                    "tint": [1, 1, 1, 1],
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
                     "texture": "concretebarrier",
                     "sampler": "default"
                 }
@@ -195,99 +281,152 @@
         },
         //z indicates camera is where the position of camera starts
         //to make myself start at the begining of the plane make z in camera = y in plane
-        "world":[
-
+        "world": [
             {
-                
-                "position": [0, 0, 97],
+                "position": [
+                    0,
+                    0,
+                    102
+                ],
                 "components": [
                     {
                         "type": "Camera"
                     },
                     {
                         "type": "Free Camera Controller"
-                        
                     },
                     {
                         "type": "Movement",
-                        
-                        "linearVelocity": [0, 0, -1]
+                        "linearVelocity": [
+                            0,
+                            0,
+                            -1
+                        ]
                     }
                 ],
                 "children": [
-                   
+                    {
+                        "name": "MyMoto",
+                        "position": [
+                            0,
+                            -0.3,
+                            -3
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "components": [
                             {
-                                "name":"MyMoto",
-                                "position": [0, -0.3, -3],
-                                "rotation": [0, 0, 0],
-                                 "scale": [1, 1,1],
-                                 "components": [
-                            
-                             {
-                                "type":"Collision",
-                                 "center":[0,0,0,1],
-                                 "radius":0.5
-                             }
-                           
+                                "type": "Collision",
+                                "center": [
+                                    0,
+                                    0,
+                                    0,
+                                    1
                                 ],
-                                "children": [
-                                
+                                "radius": 0.5
+                            }
+                        ],
+                        "children": [
+                            {
+                                "position": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "rotation": [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "scale": [
+                                    0.01,
+                                    0.01,
+                                    0.01
+                                ],
+                                "components": [
                                     {
-                                        "position": [0, 0, 0],
-                                        "rotation": [0, 0, 0],
-                                        "scale": [0.01, 0.01,0.01],
-                                        "components": [
-                                            {
-                                                "type": "Mesh Renderer",
-                                                "mesh": "motorcycle",
-                                                "material": "motorcycle"
-                                            }
-                                            
-
-                                        ]
-                                        
+                                        "type": "Mesh Renderer",
+                                        "mesh": "motorcycle",
+                                        "material": "motorcycle"
                                     }
                                 ]
-                                        }
-                                ]
+                            }
+                        ]
+                    }
+                ]
             },
-           
             {
-                "position": [0, -1, 0],
-                "rotation": [-90, 0, 0],
-                "scale": [7, 100, 1],
+                "position": [
+                    0,
+                    -1,
+                    0
+                ],
+                "rotation": [
+                    -90,
+                    0,
+                    0
+                ],
+                "scale": [
+                    7,
+                    100,
+                    1
+                ],
                 "components": [
                     {
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "grass"
                     }
-                   
                 ]
-                
             },
-            
             {
-                "position": [0, 1, -100],
-                "rotation": [0, 0, 0],
-                "scale": [10, 10, 2],
+                "position": [
+                    0,
+                    1,
+                    -100
+                ],
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    10,
+                    10,
+                    2
+                ],
                 "components": [
                     {
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "glass"
-                        
                     }
-                
                 ]
-                
-                   
             },
-            
             {
-                "position": [-50, 50, -10],
-                "rotation": [45, 45, 0],
-                "scale": [20, 20, 20],
+                "position": [
+                    -50,
+                    50,
+                    -10
+                ],
+                "rotation": [
+                    45,
+                    45,
+                    0
+                ],
+                "scale": [
+                    20,
+                    20,
+                    20
+                ],
                 "components": [
                     {
                         "type": "Mesh Renderer",
@@ -296,189 +435,316 @@
                     },
                     {
                         "type": "Movement",
-                        "angularVelocity": [0, 90, 0]
+                        "angularVelocity": [
+                            0,
+                            90,
+                            0
+                        ]
                     }
                 ]
             },
-            {   "name":"EnemyMoto",
-                "position": [4, -0.3, 90],
-                "rotation": [0, 0, 0],
-                "scale": [1, 1,1],
+            {
+                "name": "EnemyMoto",
+                "position": [
+                    4,
+                    -0.3,
+                    99
+                ],
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
                 "components": [
-                 
                     {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.5
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.5
                     },
                     {
                         "type": "Movement",
-                        
-                        "linearVelocity": [0, 0, -5]
+                        "linearVelocity": [
+                            0,
+                            0,
+                            -5
+                        ]
                     }
-                   
                 ],
                 "children": [
-                   
                     {
-                        "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [0.01, 0.01,0.01],
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            0.01,
+                            0.01,
+                            0.01
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
                                 "mesh": "motorcycleenemy",
                                 "material": "motorcycleenemy"
                             }
-                            
-
                         ]
-                        
                     }
                 ]
-                  
-               
             },
             {
-                "name":"EnemyMoto",
-                "position": [-4, -0.3, 90],
-                "rotation": [0, 0, 0],
-                "scale": [1, 1,1],
+                "name": "EnemyMoto",
+                "position": [
+                    -4,
+                    -0.3,
+                    99
+                ],
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
                 "components": [
-                 
                     {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.5
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.5
                     },
                     {
                         "type": "Movement",
-                        
-                        "linearVelocity": [0, 0, -5]
+                        "linearVelocity": [
+                            0,
+                            0,
+                            -5
+                        ]
                     }
-                   
                 ],
                 "children": [
-                   
                     {
-                        "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [0.01, 0.01,0.01],
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            0.01,
+                            0.01,
+                            0.01
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
                                 "mesh": "motorcycleenemy",
                                 "material": "motorcycleenemy"
                             }
-                            
-
                         ]
-                        
                     }
                 ]
-                  
-               
             },
             {
-                "name":"EnemyMoto",
-                "position": [2.5, -0.3, 90],
-                "rotation": [0, 0, 0],
-                "scale": [1, 1,1],
+                "name": "EnemyMoto",
+                "position": [
+                    2.5,
+                    -0.3,
+                    99
+                ],
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
                 "components": [
-                 
                     {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.5
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.5
                     },
                     {
                         "type": "Movement",
-                        
-                        "linearVelocity": [0, 0, -5]
+                        "linearVelocity": [
+                            0,
+                            0,
+                            -5
+                        ]
                     }
-                   
                 ],
                 "children": [
-                   
                     {
-                        "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [0.01, 0.01,0.01],
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            0.01,
+                            0.01,
+                            0.01
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
                                 "mesh": "motorcycleenemy",
                                 "material": "motorcycleenemy"
                             }
-                            
-
                         ]
-                        
                     }
                 ]
-                  
-               
             },
-            {   
-                "name":"EnemyMoto",
-                "position": [2.5, -0.3, 100],
-                "rotation": [0, 0, 0],
-                "scale": [1, 1,1],
+            {
+                "name": "EnemyMoto",
+                "position": [
+                    2.5,
+                    -0.3,
+                    99
+                ],
+                "rotation": [
+                    0,
+                    180,
+                    0
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
                 "components": [
-                 
                     {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.5
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.5
                     },
                     {
                         "type": "Movement",
-                        
-                        "linearVelocity": [0, 0, -8]
+                        "linearVelocity": [
+                            0,
+                            0,
+                            -8
+                        ]
                     }
-                   
                 ],
                 "children": [
-                   
                     {
-                        "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [0.01, 0.01,0.01],
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            0.01,
+                            0.01,
+                            0.01
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
                                 "mesh": "motorcycleenemy",
                                 "material": "motorcycleenemy"
                             }
-                            
-
                         ]
-                        
                     }
                 ]
-                  
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, 90],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    90
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -486,31 +752,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, 80],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    80
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -518,31 +808,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, 70],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    70
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -550,31 +864,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, 60],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    60
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -582,31 +920,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, 50],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    50
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -614,31 +976,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, 40],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    40
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -646,31 +1032,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, 30],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    30
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -678,31 +1088,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, 20],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    20
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -710,31 +1144,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, 10],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    10
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -742,31 +1200,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, 0],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    0
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -774,31 +1256,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, -10],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    -10
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -806,31 +1312,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, -20],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    -20
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -838,31 +1368,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, -30],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    -30
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -870,31 +1424,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, -40],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    -40
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -902,31 +1480,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, -50],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    -50
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -934,31 +1536,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, 60],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    60
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -966,31 +1592,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, -70],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    -70
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -998,31 +1648,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, -80],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    -80
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1030,31 +1704,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, 90],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    90
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1062,31 +1760,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, 80],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    80
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1094,31 +1816,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, 70],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    70
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1126,31 +1872,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, 60],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    60
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1158,31 +1928,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, 50],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    50
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1190,31 +1984,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, 40],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    40
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1222,31 +2040,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, 30],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    30
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1254,31 +2096,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, 20],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    20
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1286,31 +2152,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, 10],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    10
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1318,31 +2208,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, 0],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    0
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1350,31 +2264,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, -10],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    -10
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1382,31 +2320,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, -20],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    -20
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1414,31 +2376,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, -30],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    -30
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1446,31 +2432,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, -40],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    -40
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1478,31 +2488,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, -50],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    -50
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1510,31 +2544,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, -60],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    -60
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1542,31 +2600,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [-6, -1, -70],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    -6,
+                    -1,
+                    -70
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1574,31 +2656,55 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "name":"ConcreteBarrier",
-                "position": [6, -1, -80],
-                "rotation": [0, 90, 0],
-                "scale": [0.05, 0.05,0.05],
-                "components": [
-                 
-                    {
-                        "type":"Collision",
-                        "center":[0,0,0,1],
-                        "radius":0.8
-                    }
-                    
-                
+                "name": "ConcreteBarrier",
+                "position": [
+                    6,
+                    -1,
+                    -80
                 ],
-                    "children":
-                    [
-                    { "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1,1],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.05,
+                    0.05,
+                    0.05
+                ],
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 0.8
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -1606,26 +2712,81 @@
                                 "material": "concretebarrier"
                             }
                         ]
-                     }
-                    
+                    }
                 ]
-               
             },
             {
-                "position": [0, -1, 40],
-                "rotation": [0, -70, 0],
-                "scale": [0.3, 1.2,0.7],
+                "position": [
+                    0,
+                    -1,
+                    40
+                ],
+                "rotation": [
+                    0,
+                    -70,
+                    0
+                ],
+                "scale": [
+                    0.3,
+                    1.2,
+                    0.7
+                ],
                 "components": [
                     {
                         "type": "Mesh Renderer",
                         "mesh": "redbarrier",
                         "material": "redbarrier"
                     }
-                    
                 ]
-               
+            },
+            {
+                "position": [
+                    0,
+                    0,
+                    95
+                ],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.8,
+                    0.7,
+                    0.7
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "startline",
+                        "material": "startline"
+                    }
+                ]
+            },
+            {
+                "position": [
+                    0,
+                    3,
+                    95
+                ],
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    2,
+                    1,
+                    2
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "startsign"
+                    }
+                ]
             }
-
         ]
     }
 }
