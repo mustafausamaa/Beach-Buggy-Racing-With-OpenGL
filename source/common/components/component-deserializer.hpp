@@ -6,6 +6,7 @@
 #include "free-camera-controller.hpp"
 #include "movement.hpp"
 #include "collision.hpp"
+#include "respawning.hpp"
 
 namespace our
 {
@@ -35,6 +36,10 @@ namespace our
         else if (type == CollisionComponent::getID())
         {
             component = entity->addComponent<CollisionComponent>();
+        }
+        else if (type == RespawnComponent::getID())
+        {
+            component = entity->addComponent<RespawnComponent>();
         }
         if (component)
             component->deserialize(data);

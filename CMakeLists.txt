@@ -77,16 +77,16 @@ set(COMMON_SOURCES
         source/common/components/free-camera-controller.cpp
         source/common/components/movement.hpp
         source/common/components/movement.cpp
-        source/common/components/respawn.hpp
-        source/common/components/respawn.cpp
         source/common/components/collision.hpp
         source/common/components/collision.cpp
+        source/common/components/respawning.hpp
+        source/common/components/respawning.cpp
         source/common/components/component-deserializer.hpp
 
         source/common/systems/forward-renderer.hpp
         source/common/systems/free-camera-controller.hpp
         source/common/systems/movement.hpp
-        source/common/systems/respawn.hpp
+        source/common/systems/respawning.hpp
         source/common/systems/collision.hpp
 )
 
