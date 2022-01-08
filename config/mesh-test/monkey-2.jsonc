@@ -16,7 +16,7 @@
         ]
     },
     "scene": {
-        "mesh": "assets/models/monkey.obj",
+        "mesh": "assets/models/3d-model.obj",
         "output_type": 2
     }
 }

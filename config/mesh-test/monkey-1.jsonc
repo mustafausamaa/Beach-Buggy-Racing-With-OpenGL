@@ -16,7 +16,7 @@
         ]
     },
     "scene": {
-        "mesh": "assets/models/monkey.obj",
-        "output_type": 1
+        "mesh": "assets/models/moto1.obj",
+        "output_type": 4
     }
 }
