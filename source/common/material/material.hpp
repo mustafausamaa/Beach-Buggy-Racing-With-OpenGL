@@ -56,10 +56,10 @@ namespace our
         void setup() const override;
         void deserialize(const nlohmann::json &data) override;
     };
-    class LitMaterial : public TintedMaterial
+    class LitMaterial : public TexturedMaterial
     {
     public:
-        Texture2D *texture[5];
+        Texture2D *textures[5];
         Sampler *sampler;
         float alphaThreshold;
 

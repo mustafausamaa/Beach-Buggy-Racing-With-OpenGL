@@ -14,13 +14,13 @@ out Varyings {
     vec2 tex_coord;
 } vs_out;
 
-uniform mat4 M;
+uniform mat4 transform;
 uniform mat4 M_IT;
 uniform mat4 VP;
 uniform vec3 eye;
 
 void main(){
-    vec3 world = (M * vec4(position, 1.0)).xyz;
+    vec3 world = (transform * vec4(position, 1.0)).xyz;
     gl_Position = VP * vec4(world, 1.0);
     vs_out.normal = (M_IT * vec4(normal, 0.0)).xyz;
     vs_out.view = eye - world;

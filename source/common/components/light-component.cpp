@@ -7,55 +7,37 @@
 
 namespace our
 {
-    LightType LightComponent::getLightType()
-    {
-        return lightType;
-    }
 
-    void LightComponent::setDirectional(glm::vec3 direction)
+    void LightComponent::deserialize(const nlohmann::json &data)
     {
-        lightType = LightType::DIRECTIONAL;
-        direction = direction;
-        diffuse = {1, 1, 1};
-        specular = {1, 1, 1};
-        ambient = {26, 26, 26};
-    }
-    void LightComponent::set_camera_transform(glm::mat4 camera_transform)
-    {
-        our::camera_transform = camera_transform;
-    }
-    void LightComponent::seteyeposition(glm::vec3 eye)
-    {
-        our::eye = eye;
-    }
-    void LightComponent::Update()
-    {
-        program->use();
+        if (!data.is_object())
+            return;
+        // Notice how we just get a string from the json file and pass it to the AssetLoader to get us the actual asset
+        int inttype = data.value("lightType", 0);
 
-        program->set("light.diffuse", this->diffuse);
-        program->set("light.specular", this->specular);
-        program->set("light.ambient", this->ambient);
+        color = data.value("color", color);
 
-        switch (lightType)
+        if (inttype == 0)
         {
-        case LightType::DIRECTIONAL:
-            program->set("light.direction", glm::normalize(direction));
-            break;
-        case LightType::POINT:
-            program->set("light.position", position);
-            program->set("light.attenuation_constant", attenuation.constant);
-            program->set("light.attenuation_linear", attenuation.linear);
-            program->set("light.attenuation_quadratic", attenuation.quadratic);
-            break;
-        case LightType::SPOTLIGHT:
-            program->set("light.position", position);
-            program->set("light.direction", glm::normalize(direction));
-            program->set("light.attenuation_constant", attenuation.constant);
-            program->set("light.attenuation_linear", attenuation.linear);
-            program->set("light.attenuation_quadratic", attenuation.quadratic);
-            program->set("light.inner_angle", spot_angle.inner);
-            program->set("light.outer_angle", spot_angle.outer);
-            break;
+            lightType = LightType::DIRECTIONAL;
+            direction = data.value("direction", glm::vec3(-1, 0, 0)); // Used for Directional and Spot Lights only
+        }
+        else if (inttype == 1)
+        {
+            lightType = LightType::POINT;
+            attenuation.constant = data.value("attenuation_constant", 0.0f); // Used for Point and Spot Lights only
+            attenuation.linear = data.value("attenuation_linear", 0.0f);
+            attenuation.quadratic = data.value("attenuation_quadratic", 0.0f);
+        }
+        else if (inttype == 2)
+        {
+            lightType = LightType::SPOTLIGHT;
+            direction = data.value("direction", direction);                  // Used for Directional and Spot Lights only
+            attenuation.constant = data.value("attenuation_constant", 0.0f); // Used for Point and Spot Lights only
+            attenuation.linear = data.value("attenuation_linear", 0.0f);
+            attenuation.quadratic = data.value("attenuation_quadratic", 0.0f);
+            spot_angle.inner = data.value("inner_angle", 0.0f); // Used for Spot Lights only
+            spot_angle.outer = data.value("outer_angle", 0.0f);
         }
     }
 }

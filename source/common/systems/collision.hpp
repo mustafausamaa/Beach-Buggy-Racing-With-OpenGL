@@ -20,6 +20,9 @@ namespace our
     class CollisionSystem
     {
     public:
+        bool gameover = false;
+        bool win = false;
+
         // This should be called every frame to update all entities containing a CollisionComponent.
         void update(World *world, float deltaTime)
         {
@@ -196,6 +199,7 @@ namespace our
                                             MovementComponent *speed = collidingEntity->parent->getComponent<MovementComponent>();
                                             speed->linearVelocity.z += -0.5; // speed increase by 1 in -z direction
                                             collideWithEntity->deleteComponent<MeshRendererComponent>();
+                                            win = true;
                                         }
                                     }
                                     // if  Enemy  collide with the red barriers
@@ -216,6 +220,34 @@ namespace our
                                             MovementComponent *speed = collidingEntity->getComponent<MovementComponent>();
                                             speed->linearVelocity.z += -0.5; // speed increase by 1 in -z direction
                                             collideWithEntity->deleteComponent<MeshRendererComponent>();
+                                        }
+                                    }
+                                    else if (collidingEntity->name == "EnemyMoto" && collideWithEntity->name == "endline")
+                                    {
+
+                                        if (collidingEntity->localTransform.position.z >= collideWithEntity->localTransform.position.z)
+
+                                        {
+                                            gameover = true;
+                                        }
+                                        // if the camera controlling our motorcycle is in the left side of the collision then collide and go left and collidingwith object go right
+                                        else if (collidingEntity->localTransform.position.z < collideWithEntity->localTransform.position.z)
+                                        {
+                                            gameover = true;
+                                        }
+                                    }
+                                    else if (collidingEntity->name == "MyMoto" && collideWithEntity->name == "endline")
+                                    {
+
+                                        if (collidingEntity->localTransform.position.z >= collideWithEntity->localTransform.position.z)
+
+                                        {
+                                            win = true;
+                                        }
+                                        // if the camera controlling our motorcycle is in the left side of the collision then collide and go left and collidingwith object go right
+                                        else if (collidingEntity->localTransform.position.z < collideWithEntity->localTransform.position.z)
+                                        {
+                                            win = true;
                                         }
                                     }
                                 }

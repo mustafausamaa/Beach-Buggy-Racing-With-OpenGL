@@ -3,7 +3,7 @@
 #include "../ecs/world.hpp"
 #include "../components/camera.hpp"
 #include "../components/mesh-renderer.hpp"
-
+#include "../components/light-component.hpp"
 #include <glad/gl.h>
 #include <vector>
 #include <algorithm>
@@ -32,6 +32,7 @@ namespace our
         // We define them here (instead of being local to the "render" function) as an optimization to prevent reallocating them every frame
         std::vector<RenderCommand> opaqueCommands;
         std::vector<RenderCommand> transparentCommands;
+        std::vector<LightComponent *> lights;
 
     public:
         // This function should be called every frame to draw the given world
@@ -46,12 +47,16 @@ namespace our
             transparentCommands.clear();
             for (auto entity : world->getEntities())
             {
-
                 // TODO check if the entity has light component
-
                 // If we hadn't found a camera yet, we look for a camera in this entity
                 if (!camera)
                     camera = entity->getComponent<CameraComponent>();
+
+                // std::cout << (int)entity->getComponent<LightComponent>()->lightType << std::endl;
+                if (auto lightRenderer = entity->getComponent<LightComponent>(); lightRenderer)
+                {
+                    lights.push_back(lightRenderer);
+                }
                 // If this entity has a mesh renderer component
                 if (auto meshRenderer = entity->getComponent<MeshRendererComponent>(); meshRenderer)
                 {
@@ -83,8 +88,8 @@ namespace our
             glm::vec3 cameraForward = camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
             std::sort(transparentCommands.begin(), transparentCommands.end(), [cameraForward](const RenderCommand &first, const RenderCommand &second)
                       {
-                //TODO: Finish this function
-                // HINT: the following return should return true "first" should be drawn before "second". 
+                // TODO: Finish this function
+                //  HINT: the following return should return true "first" should be drawn before "second".
                 return first.center.z * cameraForward.z < second.center.z * cameraForward.z; });
 
             // TODO: Get the camera ViewProjection matrix and store it in VP
@@ -103,7 +108,54 @@ namespace our
             for (auto command : opaqueCommands)
             {
                 command.material->setup();
+
                 command.material->shader->set("transform", VP * command.localToWorld);
+                if (dynamic_cast<LitMaterial *>(command.material))
+                {
+                    command.material->shader->set("transform", command.localToWorld);
+                    command.material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
+                    command.material->shader->set("VP", VP);
+                    command.material->shader->set("eye", glm::vec3(camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1)));
+                    // command.material->shader->set("transform", VP * command.localToWorld);
+                    command.material->shader->set("light_count", (int)lights.size());
+                    const int MAX_LIGHTS = 8;
+                    int lightcounter = 0;
+                    for (const auto &light : lights)
+                    {
+                        std::string prefix = "lights[" + std::to_string(lightcounter) + "].";
+                        command.material->shader->set(prefix + "type", (int)light->lightType);
+                        command.material->shader->set(prefix + "color", glm::normalize(light->color));
+
+                        switch (light->lightType)
+                        {
+                        case LightType::DIRECTIONAL:
+                            command.material->shader->set(prefix + "direction", glm::normalize(light->direction));
+                            break;
+                        case LightType::POINT:
+                            glm::vec3 pointlightposition = glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 1));
+                            command.material->shader->set(prefix + "position", pointlightposition);
+                            command.material->shader->set(prefix + "position", light->position);
+                            command.material->shader->set(prefix + "attenuation_constant", light->attenuation.constant);
+                            command.material->shader->set(prefix + "attenuation_linear", light->attenuation.linear);
+                            command.material->shader->set(prefix + "attenuation_quadratic", light->attenuation.quadratic);
+                            break;
+                        case LightType::SPOTLIGHT:
+                            glm::vec3 spotlightposition = glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 1));
+                            command.material->shader->set(prefix + "position", spotlightposition);
+                            command.material->shader->set(prefix + "position", light->position);
+                            command.material->shader->set(prefix + "direction", glm::normalize(light->direction));
+                            command.material->shader->set(prefix + "attenuation_constant", light->attenuation.constant);
+                            command.material->shader->set(prefix + "attenuation_linear", light->attenuation.linear);
+                            command.material->shader->set(prefix + "attenuation_quadratic", light->attenuation.quadratic);
+                            command.material->shader->set(prefix + "inner_angle", light->spot_angle.inner);
+                            command.material->shader->set(prefix + "outer_angle", light->spot_angle.outer);
+                            break;
+                        }
+                        lightcounter++;
+                        if (lightcounter >= MAX_LIGHTS)
+                            break;
+                    }
+                }
 
                 command.mesh->draw();
             }

@@ -5,6 +5,7 @@
 #include "mesh-renderer.hpp"
 #include "free-camera-controller.hpp"
 #include "movement.hpp"
+#include "light-component.hpp"
 #include "collision.hpp"
 #include "respawning.hpp"
 
@@ -40,6 +41,10 @@ namespace our
         else if (type == RespawnComponent::getID())
         {
             component = entity->addComponent<RespawnComponent>();
+        }
+        else if (type == LightComponent::getID())
+        {
+            component = entity->addComponent<LightComponent>();
         }
         if (component)
             component->deserialize(data);

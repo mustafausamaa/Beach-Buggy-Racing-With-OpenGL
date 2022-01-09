@@ -18,6 +18,10 @@
                 "textured": {
                     "vs": "assets/shaders/textured.vert",
                     "fs": "assets/shaders/textured.frag"
+                },
+                "light": {
+                    "vs": "assets/shaders/light.vert",
+                    "fs": "assets/shaders/light.frag"
                 }
             },
             "textures": {
@@ -34,7 +38,11 @@
                 "startline": "assets/textures/startline.jpg",
                 "startsign": "assets/textures/startsign.jpg",
                 "healthbar": "assets/textures/healthbar.png",
-                "rocket": "assets/textures/speedup.png"
+                "rocket": "assets/textures/speedup.png",
+                "albedo": "assets/textures/albedo.jpg",
+                "emissive": "assets/textures/emissive.jpg",
+                "roughness": "assets/textures/roughness.jpg",
+                "specular": "assets/textures/specular.jpg"
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -57,8 +65,8 @@
             },
             "materials": {
                 "metal": {
-                    "type": "tinted",
-                    "shader": "tinted",
+                    "type": "Lit",
+                    "shader": "light",
                     "pipelineState": {
                         "faceCulling": {
                             "enabled": false
@@ -67,13 +75,19 @@
                             "enabled": true
                         }
                     },
-                    "albedo-texture": "",
                     "tint": [
-                        0.45,
-                        0.4,
-                        0.5,
-                        1
-                    ]
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "albedo-texture": "roughness",
+                    "specular-texture": "roughness",
+                    "roughness-texture": "roughness",
+                    "ambient_occlusion-texture": "roughness",
+                    "emission-texture": "roughness",
+                    "texture": "glass",
+                    "sampler": "default"
                 },
                 "glass": {
                     "type": "textured",
@@ -508,11 +522,12 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "plane",
-                        "material": "grass"
+                        "material": "metal"
                     }
                 ]
             },
             {
+                "name": "endline",
                 "position": [
                     0,
                     1,
@@ -530,13 +545,84 @@
                 ],
                 "components": [
                     {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0,
+                            1
+                        ],
+                        "radius": 3
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "rotation": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "scale": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "components": [
+                            {
+                                "type": "Mesh Renderer",
+                                "mesh": "plane",
+                                "material": "metal"
+                            }
+                        ]
                     }
                 ]
             },
             {
+                "name": "Sun",
+                "position": [
+                    0,
+                    15,
+                    0
+                ],
+                "rotation": [
+                    -90,
+                    0,
+                    0
+                ],
+                "scale": [
+                    10,
+                    10,
+                    10
+                ],
+                "components": [
+                    {
+                        "type": "Light",
+                        "lightType": 0,
+                        "color": [
+                            0,
+                            1,
+                            1
+                        ],
+                        "direction": [
+                            0,
+                            -1,
+                            0
+                        ]
+                    },
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "sphere",
+                        "material": "metal"
+                    }
+                ]
+            },
+            {
+                "name": "Moon",
                 "position": [
                     -50,
                     50,
@@ -556,7 +642,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "sphere",
-                        "material": "moon"
+                        "material": "metal"
                     },
                     {
                         "type": "Movement",
@@ -629,7 +715,7 @@
                             {
                                 "type": "Mesh Renderer",
                                 "mesh": "motorcycleenemy",
-                                "material": "motorcycleenemy"
+                                "material": "metal"
                             }
                         ]
                     }

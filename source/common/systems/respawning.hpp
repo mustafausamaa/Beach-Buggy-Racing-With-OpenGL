@@ -19,6 +19,7 @@ namespace our
     class RespawnSystem
     {
     public:
+        bool dead = false;
         // This should be called every frame to update all entities containing a MovementComponent.
         void update(World *world, float deltaTime)
         {
@@ -80,6 +81,7 @@ namespace our
                                                 if (count == 2)
                                                 {
                                                     MotoEntity1->deleteComponent<MeshRendererComponent>();
+                                                    dead = true;
                                                     count++;
                                                     break;
                                                 }
@@ -134,6 +136,7 @@ namespace our
                                                 if (count == 2)
                                                 {
                                                     MotoEntity1->deleteComponent<MeshRendererComponent>();
+                                                    dead = true;
                                                     count++;
                                                     break;
                                                 }

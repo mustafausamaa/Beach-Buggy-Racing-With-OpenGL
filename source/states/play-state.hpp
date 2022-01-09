@@ -45,7 +45,7 @@ class Playstate : public our::State
     void onDraw(double deltaTime) override
     {
 
-        if (startgame)
+        if (startgame && !collisionSystem.win && !collisionSystem.gameover && !respawnSystem.dead)
         { // Here, we just run a bunch of systems to control the world logic
             movementSystem.update(&world, (float)deltaTime);
             collisionSystem.update(&world, (float)deltaTime);
@@ -68,18 +68,28 @@ class Playstate : public our::State
     {
 
         ImGui::Begin("Menu");
-
-        ImGui::Selectable(startgame ? "Pause Game" : "Start Game", &startgame);
-        ImGui::Selectable("Restart Game", &restart);
-        ImGui::Selectable("Exit Game", &Exit);
-        if (restart)
+        if (collisionSystem.win)
         {
-            onInitialize();
-            restart = false;
+            ImGui::Text("You Won");
+            ImGui::Selectable("Exit Game", &Exit);
+        }
+        else if (collisionSystem.gameover || respawnSystem.dead)
+        {
+            ImGui::Text("Game Over You Lost");
+            ImGui::Selectable("Exit Game", &Exit);
+        }
+        else
+        {
+            ImGui::Selectable(startgame ? "Pause Game" : "Start Game", &startgame);
+            ImGui::Selectable("Exit Game", &Exit);
         }
 
         if (Exit)
         {
+            respawnSystem.dead = false;
+            collisionSystem.win = false;
+            collisionSystem.gameover = false;
+            startgame = true;
             onDestroy();
         }
         // ImGui::

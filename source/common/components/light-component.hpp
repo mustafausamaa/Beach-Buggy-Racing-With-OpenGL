@@ -10,8 +10,6 @@
 
 namespace our
 {
-    glm::mat4 camera_transform;
-    glm::vec3 eye;
     // An enum that defines the type of the lights (directional,point,spot-light)
     enum class LightType
     {
@@ -24,10 +22,9 @@ namespace our
     {
 
     public:
-        ShaderProgram *program;
-
+        static std::string getID() { return "Light"; }
         LightType lightType;
-        glm::vec3 diffuse, specular, ambient;
+        glm::vec3 color;
         glm::vec3 position;  // Used for Point and Spot Lights only
         glm::vec3 direction; // Used for Directional and Spot Lights only
         struct
@@ -38,16 +35,6 @@ namespace our
         {
             float inner, outer;
         } spot_angle; // Used for Spot Lights only
-
-        LightType getLightType();
-
-        void setDirectional(glm::vec3 direction);
-        // void setShader(our::ShaderProgram *program)
-        // {
-        //     this->program = program;
-        // }
-        void set_camera_transform(glm::mat4 camera_transform);
-        void seteyeposition(glm::vec3 eye);
-        void Update();
+        void deserialize(const nlohmann::json &data) override;
     };
 }
