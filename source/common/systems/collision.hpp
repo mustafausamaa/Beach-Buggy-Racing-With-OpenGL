@@ -186,7 +186,7 @@ namespace our
 
                                             if (rocket)
                                             {
-                                                std::cout << "a7a" << std::endl;
+
                                                 collideWithEntity->deleteComponent<MeshRendererComponent>();
                                             }
                                         }
