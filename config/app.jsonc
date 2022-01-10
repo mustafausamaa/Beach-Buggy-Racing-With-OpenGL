@@ -29,7 +29,7 @@
                 "grass": "assets/textures/snowground.jpg",
                 "wood": "assets/textures/wood.jpg",
                 "glass": "assets/textures/glass-panels.png",
-                "monkey": "assets/textures/test1.png",
+                "monkey": "assets/textures/monkey.png",
                 "motoTexture": "assets/textures/QuadBike.jpeg",
                 "enemymotoTexture": "assets/textures/QuadBike.jpeg",
                 "redbarrier": "assets/textures/redbarrier.jpeg",
@@ -48,6 +48,7 @@
                 "cube": "assets/models/cube.obj",
                 "motorcycle": "assets/models/QuadBike.obj",
                 "motorcycleenemy": "assets/models/QuadBike.obj",
+                "monkey": "assets/models/monkey.obj",
                 "plane": "assets/models/plane.obj",
                 "sphere": "assets/models/sphere.obj",
                 "redbarrier": "assets/models/redbarrier.obj",
@@ -81,12 +82,12 @@
                         0,
                         0
                     ],
-                    "albedo-texture": "roughness",
-                    "specular-texture": "roughness",
-                    "roughness-texture": "roughness",
-                    "ambient_occlusion-texture": "roughness",
-                    "emission-texture": "roughness",
-                    "texture": "glass",
+                    "albedo-texture": "albedo",
+                    "specular-texture": "albedo",
+                    "roughness-texture": "albedo",
+                    "ambient_occlusion-texture": "albedo",
+                    "emission-texture": "albedo",
+                    "texture": "monkey",
                     "sampler": "default"
                 },
                 "glass": {
@@ -522,7 +523,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "plane",
-                        "material": "metal"
+                        "material": "grass"
                     }
                 ]
             },
@@ -576,7 +577,7 @@
                             {
                                 "type": "Mesh Renderer",
                                 "mesh": "plane",
-                                "material": "metal"
+                                "material": "glass"
                             }
                         ]
                     }
@@ -604,19 +605,19 @@
                         "type": "Light",
                         "lightType": 0,
                         "color": [
-                            0,
+                            1,
                             1,
                             1
                         ],
                         "direction": [
-                            0,
+                            -1,
                             -1,
                             0
                         ]
                     },
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "sphere",
+                        "mesh": "monkey",
                         "material": "metal"
                     }
                 ]

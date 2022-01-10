@@ -71,16 +71,20 @@ class Playstate : public our::State
         if (collisionSystem.win)
         {
             ImGui::Text("You Won");
+            ImGui::Selectable("Restart Game", &restart);
             ImGui::Selectable("Exit Game", &Exit);
         }
         else if (collisionSystem.gameover || respawnSystem.dead)
         {
             ImGui::Text("Game Over You Lost");
+            ImGui::Selectable("Restart Game", &restart);
             ImGui::Selectable("Exit Game", &Exit);
         }
         else
         {
             ImGui::Selectable(startgame ? "Pause Game" : "Start Game", &startgame);
+            ImGui::Selectable("Restart Game", &restart);
+
             ImGui::Selectable("Exit Game", &Exit);
         }
 
@@ -92,6 +96,17 @@ class Playstate : public our::State
             startgame = true;
             onDestroy();
         }
+        if (restart)
+        {
+            restart = false;
+            respawnSystem.dead = false;
+            collisionSystem.win = false;
+            collisionSystem.gameover = false;
+            startgame = true;
+            world.clear();
+            onInitialize();
+        }
+
         // ImGui::
 
         ImGui::End();
