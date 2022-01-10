@@ -90,6 +90,31 @@
                     "texture": "monkey",
                     "sampler": "default"
                 },
+                "sun": {
+                    "type": "Lit",
+                    "shader": "light",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "albedo-texture": "emissive",
+                    "specular-texture": "emissive",
+                    "roughness-texture": "emissive",
+                    "ambient_occlusion-texture": "emissive",
+                    "emission-texture": "emissive",
+                    "texture": "moon",
+                    "sampler": "default"
+                },
                 "glass": {
                     "type": "textured",
                     "shader": "textured",
@@ -623,6 +648,45 @@
                 ]
             },
             {
+                "name": "Sun2",
+                "position": [
+                    20,
+                    15,
+                    0
+                ],
+                "rotation": [
+                    -90,
+                    0,
+                    0
+                ],
+                "scale": [
+                    10,
+                    10,
+                    10
+                ],
+                "components": [
+                    {
+                        "type": "Light",
+                        "lightType": 0,
+                        "color": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "direction": [
+                            -1,
+                            -1,
+                            0
+                        ]
+                    },
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "sphere",
+                        "material": "sun"
+                    }
+                ]
+            },
+            {
                 "name": "Moon",
                 "position": [
                     -50,
@@ -716,7 +780,7 @@
                             {
                                 "type": "Mesh Renderer",
                                 "mesh": "motorcycleenemy",
-                                "material": "metal"
+                                "material": "sun"
                             }
                         ]
                     }
