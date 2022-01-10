@@ -20,8 +20,9 @@ class Playstate : public our::State
     our::MovementSystem movementSystem;
     our::CollisionSystem collisionSystem;
     our::RespawnSystem respawnSystem;
-    bool startgame = false;
+    bool startgame = true;
     bool Exit = false;
+    bool mainmenu = false;
     bool restart = false;
 
     void onInitialize() override
@@ -60,6 +61,7 @@ class Playstate : public our::State
     void onDestroy() override
     {
         // On exit, we call exit for the camera controller system to make sure that the mouse is unlocked
+        world.clear();
         cameraController.exit();
         // and we delete all the loaded assets to free memory on the RAM and the VRAM
         our::clearAllAssets();
@@ -72,28 +74,39 @@ class Playstate : public our::State
         {
             ImGui::Text("You Won");
             ImGui::Selectable("Restart Game", &restart);
-            ImGui::Selectable("Exit Game", &Exit);
+            // ImGui::Selectable("Exit Game", &Exit);
+            ImGui::Selectable("Return to Main Menu", &mainmenu);
         }
         else if (collisionSystem.gameover || respawnSystem.dead)
         {
             ImGui::Text("Game Over You Lost");
             ImGui::Selectable("Restart Game", &restart);
-            ImGui::Selectable("Exit Game", &Exit);
+            // ImGui::Selectable("Exit Game", &Exit);
+            ImGui::Selectable("Return to Main Menu", &mainmenu);
         }
         else
         {
             ImGui::Selectable(startgame ? "Pause Game" : "Start Game", &startgame);
             ImGui::Selectable("Restart Game", &restart);
+            ImGui::Selectable("Return to Main Menu", &mainmenu);
 
-            ImGui::Selectable("Exit Game", &Exit);
+            // ImGui::Selectable("Exit Game", &Exit);
         }
+        if (mainmenu)
+        {
 
+            our::State::getApp()->changeState("main");
+            mainmenu = false;
+            restart = true;
+            startgame = true;
+            onDestroy();
+        }
         if (Exit)
         {
             respawnSystem.dead = false;
             collisionSystem.win = false;
             collisionSystem.gameover = false;
-            startgame = true;
+
             onDestroy();
         }
         if (restart)
@@ -103,7 +116,7 @@ class Playstate : public our::State
             collisionSystem.win = false;
             collisionSystem.gameover = false;
             startgame = true;
-            world.clear();
+            onDestroy();
             onInitialize();
         }
 
