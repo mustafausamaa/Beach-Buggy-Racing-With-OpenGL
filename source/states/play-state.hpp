@@ -69,7 +69,7 @@ class Playstate : public our::State
     void onImmediateGui() override
     {
 
-        ImGui::Begin("Menu");
+        ImGui::Begin("In Game Menu");
         if (collisionSystem.win)
         {
             ImGui::Text("You Won");

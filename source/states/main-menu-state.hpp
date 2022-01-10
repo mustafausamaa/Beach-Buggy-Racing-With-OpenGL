@@ -29,7 +29,12 @@ class MenuState : public our::State
     {
 
         ImGui::Begin("Main Menu");
+        for (int i = 0; i < 20; i++)
+        {
+            ImGui::NewLine();
+        }
 
+        ImGui::Indent(ImGui::GetWindowWidth() / 2 - 50);
         ImGui::Selectable("Start Game", &startgame);
 
         // ImGui::Selectable("Exit Game", &Exit);
