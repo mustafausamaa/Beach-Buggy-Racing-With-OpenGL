@@ -34,7 +34,6 @@
                 "enemymotoTexture": "assets/textures/QuadBike.jpeg",
                 "redbarrier": "assets/textures/redbarrier.jpeg",
                 "concretebarrier": "assets/textures/concretebarrier.jpeg",
-                "driver": "assets/textures/driver.png",
                 "startline": "assets/textures/startline.jpg",
                 "startsign": "assets/textures/startsign.jpg",
                 "healthbar": "assets/textures/healthbar.png",
@@ -45,7 +44,6 @@
                 "specular": "assets/textures/specular.jpg"
             },
             "meshes": {
-                "cube": "assets/models/cube.obj",
                 "motorcycle": "assets/models/QuadBike.obj",
                 "motorcycleenemy": "assets/models/QuadBike.obj",
                 "monkey": "assets/models/monkey.obj",
@@ -53,7 +51,6 @@
                 "sphere": "assets/models/sphere.obj",
                 "redbarrier": "assets/models/redbarrier.obj",
                 "concretebarrier": "assets/models/concretebarrier.obj",
-                "driver": "assets/textures/driver.obj",
                 "startline": "assets/models/startline.obj",
                 "healthbar": "assets/models/healthbar.obj",
                 "rocket": "assets/models/speedup.obj"
@@ -260,26 +257,6 @@
                         1
                     ],
                     "texture": "enemymotoTexture",
-                    "sampler": "default"
-                },
-                "driver": {
-                    "type": "textured",
-                    "shader": "textured",
-                    "pipelineState": {
-                        "faceCulling": {
-                            "enabled": false
-                        },
-                        "depthTesting": {
-                            "enabled": true
-                        }
-                    },
-                    "tint": [
-                        1,
-                        1,
-                        1,
-                        1
-                    ],
-                    "texture": "driver",
                     "sampler": "default"
                 },
                 "moon": {

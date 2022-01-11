@@ -149,7 +149,6 @@ namespace our
         TexturedMaterial::deserialize(data);
         if (!data.is_object())
             return;
-        alphaThreshold = data.value("alphaThreshold", 0.0f);
         textures[0] = AssetLoader<Texture2D>::get(data.value("albedo-texture", ""));
         textures[1] = AssetLoader<Texture2D>::get(data.value("specular-texture", ""));
         textures[2] = AssetLoader<Texture2D>::get(data.value("roughness-texture", ""));

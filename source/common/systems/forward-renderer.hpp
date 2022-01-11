@@ -134,7 +134,6 @@ namespace our
                         case LightType::POINT:
                             glm::vec3 pointlightposition = glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 1));
                             command.material->shader->set(prefix + "position", pointlightposition);
-                            command.material->shader->set(prefix + "position", light->position);
                             command.material->shader->set(prefix + "attenuation_constant", light->attenuation.constant);
                             command.material->shader->set(prefix + "attenuation_linear", light->attenuation.linear);
                             command.material->shader->set(prefix + "attenuation_quadratic", light->attenuation.quadratic);
@@ -142,7 +141,6 @@ namespace our
                         case LightType::SPOTLIGHT:
                             glm::vec3 spotlightposition = glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 1));
                             command.material->shader->set(prefix + "position", spotlightposition);
-                            command.material->shader->set(prefix + "position", light->position);
                             command.material->shader->set(prefix + "direction", glm::normalize(light->direction));
                             command.material->shader->set(prefix + "attenuation_constant", light->attenuation.constant);
                             command.material->shader->set(prefix + "attenuation_linear", light->attenuation.linear);

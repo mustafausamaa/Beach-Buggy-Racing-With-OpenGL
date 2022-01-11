@@ -132,7 +132,7 @@ namespace our
             AssetLoader<Mesh>::deserialize(assetData["meshes"]);
         if (assetData.contains("materials"))
             AssetLoader<Material>::deserialize(assetData["materials"]);
-    }
+        }
 
     void clearAllAssets()
     {

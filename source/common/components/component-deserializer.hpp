@@ -42,7 +42,7 @@ namespace our
         {
             component = entity->addComponent<RespawnComponent>();
         }
-        else if (type == LightComponent::getID())
+        if (type == LightComponent::getID())
         {
             component = entity->addComponent<LightComponent>();
         }
