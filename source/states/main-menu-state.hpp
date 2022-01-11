@@ -35,11 +35,6 @@ class MenuState : public our::State
 
         ImGui::Indent(ImGui::GetWindowWidth() / 2 - 50);
         ImGui::Selectable("Start Game", &startgame);
-        if (Exit)
-        {
-            startgame = false;
-            onDestroy();
-        }
         // If user clicked start game change state to playstate and starts the game
         if (startgame)
         {
