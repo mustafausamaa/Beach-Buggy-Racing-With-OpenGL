@@ -137,7 +137,7 @@ namespace our
                             command.material->shader->set(prefix + "direction", glm::normalize(light->direction)); // Used for Directional and Spot Lights only
                             break;
                         case LightType::POINT:
-                            // get postition of the parent
+                            // get postition of the parent and keep it relative to the parent
                             glm::vec3 pointlightposition = glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 1));
                             command.material->shader->set(prefix + "position", pointlightposition);                      // Used for Point and Spot Lights only
                             command.material->shader->set(prefix + "attenuation_constant", light->attenuation.constant); // Used for Point and Spot Lights only
@@ -145,7 +145,7 @@ namespace our
                             command.material->shader->set(prefix + "attenuation_quadratic", light->attenuation.quadratic);
                             break;
                         case LightType::SPOTLIGHT:
-                            // get postition of the parent
+                            // get postition of the parent and keep it relative to the parent
                             glm::vec3 spotlightposition = glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 1));
                             command.material->shader->set(prefix + "position", spotlightposition);                       // Used for Point and Spot Lights only
                             command.material->shader->set(prefix + "direction", glm::normalize(light->direction));       // Used for Directional and Spot Lights only
