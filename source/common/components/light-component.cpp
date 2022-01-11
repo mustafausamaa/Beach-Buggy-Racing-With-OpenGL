@@ -12,7 +12,7 @@ namespace our
     {
         if (!data.is_object())
             return;
-        // Notice how we just get a string from the json file and pass it to the AssetLoader to get us the actual asset
+
         int inttype = data.value("lightType", 0);
 
         color = data.value("color", color);

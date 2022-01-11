@@ -91,54 +91,66 @@ namespace our
     {
         // TODO: Write this function
         // 1) call material setup to set the pipeline state and set the shader to be used
-        // std::cout << "I'm Hereeee" << std::endl;
         Material::setup();
 
         // 2) set the Uniform alphaThreshold in textured shader with the data member alphathreshold
         shader->set("alphaThreshold", alphaThreshold);
+        // Set Active texture 6
         glActiveTexture(GL_TEXTURE6);
         texture->bind();
-
-        // 4) bind the sampler to the same unit number 0
+        // bind the sampler to the same unit number 6
         sampler->bind(6);
-
-        // 5) we send 0(the index of the texture unit we used above)to the "tex" uniform in textured shader
+        // we send 6(the index of the texture unit we used above)to the "tex" uniform in textured shader
         shader->set("tex", 6);
         if (textures[0])
         {
+            // Set Active texture 0
             glActiveTexture(GL_TEXTURE0);
             textures[0]->bind();
-            // 4) bind the sampler to the same unit number 0
+            // bind the sampler to the same unit number 0
             sampler->bind(0);
-            // 5) we send 0(the index of the texture unit we used above)to the "tex" uniform in textured shader
+            // we send 0(the index of the texture unit we used above)to the "material.albedo" uniform in light shader
             shader->set("material.albedo", 0);
         }
         if (textures[1])
         {
+            // Set Active texture 1
             glActiveTexture(GL_TEXTURE1);
             textures[1]->bind();
+            // bind the sampler to the same unit number 1
             sampler->bind(1);
+            // we send 1(the index of the texture unit we used above)to the "material.specular" uniform in light shader
             shader->set("material.specular", 1);
         }
         if (textures[2])
         {
+            // Set Active texture 2
             glActiveTexture(GL_TEXTURE2);
             textures[2]->bind();
+            // bind the sampler to the same unit number 2
             sampler->bind(2);
+            // we send 2(the index of the texture unit we used above)to the "material.roughness" uniform in light shader
             shader->set("material.roughness", 2);
         }
         if (textures[3])
         {
+            // Set Active texture 3
             glActiveTexture(GL_TEXTURE3);
             textures[3]->bind();
+            // bind the sampler to the same unit number 3
             sampler->bind(3);
+            // we send 3(the index of the texture unit we used above)to the "material.ambient_occlusion" uniform in light shader
+
             shader->set("material.ambient_occlusion", 3);
         }
         if (textures[4])
         {
+            // Set Active texture 4
             glActiveTexture(GL_TEXTURE4);
             textures[4]->bind();
+            // bind the sampler to the same unit number 4
             sampler->bind(4);
+            // we send 4(the index of the texture unit we used above)to the "material.emission" uniform in light shader
             shader->set("material.emission", 4);
         }
     }
@@ -146,9 +158,12 @@ namespace our
     // This function read the material data from a json object
     void LitMaterial::deserialize(const nlohmann::json &data)
     {
+        // load the object texture from the json file
         TexturedMaterial::deserialize(data);
         if (!data.is_object())
             return;
+
+        // Get the all the textures from the json file
         textures[0] = AssetLoader<Texture2D>::get(data.value("albedo-texture", ""));
         textures[1] = AssetLoader<Texture2D>::get(data.value("specular-texture", ""));
         textures[2] = AssetLoader<Texture2D>::get(data.value("roughness-texture", ""));

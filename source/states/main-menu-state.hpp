@@ -16,7 +16,6 @@ class MenuState : public our::State
 
     our::World world;
     bool startgame = false;
-    bool Exit = false;
     void onDestroy() override
     {
         // and we delete all the loaded assets to free memory on the RAM and the VRAM
@@ -36,14 +35,12 @@ class MenuState : public our::State
 
         ImGui::Indent(ImGui::GetWindowWidth() / 2 - 50);
         ImGui::Selectable("Start Game", &startgame);
-
-        // ImGui::Selectable("Exit Game", &Exit);
-
         if (Exit)
         {
             startgame = false;
             onDestroy();
         }
+        // If user clicked start game change state to playstate and starts the game
         if (startgame)
         {
             world.clear();

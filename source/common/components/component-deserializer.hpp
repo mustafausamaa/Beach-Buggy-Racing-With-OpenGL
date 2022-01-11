@@ -44,7 +44,7 @@ namespace our
         }
         if (type == LightComponent::getID())
         {
-            component = entity->addComponent<LightComponent>();
+            component = entity->addComponent<LightComponent>(); // Added Light component to our entities
         }
         if (component)
             component->deserialize(data);

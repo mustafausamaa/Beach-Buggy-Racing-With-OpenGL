@@ -21,7 +21,6 @@ class Playstate : public our::State
     our::CollisionSystem collisionSystem;
     our::RespawnSystem respawnSystem;
     bool startgame = true;
-    bool Exit = false;
     bool mainmenu = false;
     bool restart = false;
 
@@ -45,7 +44,8 @@ class Playstate : public our::State
 
     void onDraw(double deltaTime) override
     {
-
+        // check if the user paused the game or won or lose or dead
+        //  if so pause on Draw
         if (startgame && !collisionSystem.win && !collisionSystem.gameover && !respawnSystem.dead)
         { // Here, we just run a bunch of systems to control the world logic
             movementSystem.update(&world, (float)deltaTime);
@@ -74,24 +74,23 @@ class Playstate : public our::State
         {
             ImGui::Text("You Won");
             ImGui::Selectable("Restart Game", &restart);
-            // ImGui::Selectable("Exit Game", &Exit);
             ImGui::Selectable("Return to Main Menu", &mainmenu);
         }
+        // show this menu if the user lost
         else if (collisionSystem.gameover || respawnSystem.dead)
         {
             ImGui::Text("Game Over You Lost");
             ImGui::Selectable("Restart Game", &restart);
-            // ImGui::Selectable("Exit Game", &Exit);
             ImGui::Selectable("Return to Main Menu", &mainmenu);
         }
+        // show this menu if the user Won
         else
         {
             ImGui::Selectable(startgame ? "Pause Game" : "Start Game", &startgame);
             ImGui::Selectable("Restart Game", &restart);
             ImGui::Selectable("Return to Main Menu", &mainmenu);
-
-            // ImGui::Selectable("Exit Game", &Exit);
         }
+        // check if the user clicked on return to main menu and change the state to main menu
         if (mainmenu)
         {
 
@@ -101,14 +100,7 @@ class Playstate : public our::State
             startgame = true;
             onDestroy();
         }
-        if (Exit)
-        {
-            respawnSystem.dead = false;
-            collisionSystem.win = false;
-            collisionSystem.gameover = false;
-
-            onDestroy();
-        }
+        // check if the user clicked on restart and restart the game
         if (restart)
         {
             restart = false;

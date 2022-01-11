@@ -45,14 +45,15 @@ namespace our
             CameraComponent *camera = nullptr;
             opaqueCommands.clear();
             transparentCommands.clear();
+            lights.clear(); // clear light vector
             for (auto entity : world->getEntities())
             {
-                // TODO check if the entity has light component
+
                 // If we hadn't found a camera yet, we look for a camera in this entity
                 if (!camera)
                     camera = entity->getComponent<CameraComponent>();
 
-                // std::cout << (int)entity->getComponent<LightComponent>()->lightType << std::endl;
+                // TODO check if the entity has light component
                 if (auto lightRenderer = entity->getComponent<LightComponent>(); lightRenderer)
                 {
                     lights.push_back(lightRenderer);
@@ -110,18 +111,21 @@ namespace our
                 command.material->setup();
 
                 command.material->shader->set("transform", VP * command.localToWorld);
+                // check if the entity has litMaterial
                 if (dynamic_cast<LitMaterial *>(command.material))
                 {
+                    // Set the matrix and matrix inverse transpose, VP, Eye  in vertix shader
+                    // set light count in fragment shaer of light
                     command.material->shader->set("transform", command.localToWorld);
                     command.material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
                     command.material->shader->set("VP", VP);
                     command.material->shader->set("eye", glm::vec3(camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1)));
-                    // command.material->shader->set("transform", VP * command.localToWorld);
                     command.material->shader->set("light_count", (int)lights.size());
                     const int MAX_LIGHTS = 8;
                     int lightcounter = 0;
                     for (const auto &light : lights)
                     {
+                        // Read Light type and color from Light component
                         std::string prefix = "lights[" + std::to_string(lightcounter) + "].";
                         command.material->shader->set(prefix + "type", (int)light->lightType);
                         command.material->shader->set(prefix + "color", glm::normalize(light->color));
@@ -129,20 +133,23 @@ namespace our
                         switch (light->lightType)
                         {
                         case LightType::DIRECTIONAL:
-                            command.material->shader->set(prefix + "direction", glm::normalize(light->direction));
+                            // Load direction of light from light component from json file
+                            command.material->shader->set(prefix + "direction", glm::normalize(light->direction)); // Used for Directional and Spot Lights only
                             break;
                         case LightType::POINT:
+                            // get postition of the parent
                             glm::vec3 pointlightposition = glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 1));
-                            command.material->shader->set(prefix + "position", pointlightposition);
-                            command.material->shader->set(prefix + "attenuation_constant", light->attenuation.constant);
+                            command.material->shader->set(prefix + "position", pointlightposition);                      // Used for Point and Spot Lights only
+                            command.material->shader->set(prefix + "attenuation_constant", light->attenuation.constant); // Used for Point and Spot Lights only
                             command.material->shader->set(prefix + "attenuation_linear", light->attenuation.linear);
                             command.material->shader->set(prefix + "attenuation_quadratic", light->attenuation.quadratic);
                             break;
                         case LightType::SPOTLIGHT:
+                            // get postition of the parent
                             glm::vec3 spotlightposition = glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 1));
-                            command.material->shader->set(prefix + "position", spotlightposition);
-                            command.material->shader->set(prefix + "direction", glm::normalize(light->direction));
-                            command.material->shader->set(prefix + "attenuation_constant", light->attenuation.constant);
+                            command.material->shader->set(prefix + "position", spotlightposition);                       // Used for Point and Spot Lights only
+                            command.material->shader->set(prefix + "direction", glm::normalize(light->direction));       // Used for Directional and Spot Lights only
+                            command.material->shader->set(prefix + "attenuation_constant", light->attenuation.constant); // Used for Point and Spot Lights only
                             command.material->shader->set(prefix + "attenuation_linear", light->attenuation.linear);
                             command.material->shader->set(prefix + "attenuation_quadratic", light->attenuation.quadratic);
                             command.material->shader->set(prefix + "inner_angle", light->spot_angle.inner);
